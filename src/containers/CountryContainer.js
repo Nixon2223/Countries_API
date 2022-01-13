@@ -2,13 +2,13 @@ import React, {useState, useEffect} from "react";
 import CountryList from '../components/CountryList'
 import CountryDetails from "../components/CountryDetails";
 import FavCountryList from "../components/FavCountryList";
+import "./CountryContainer.css";
 
 
 const CountryContainer = () => {
     const[countries, setCountries] = useState([]);
     const[selectedCountry, setSelectedCountry] = useState(null);
     const[favouriteCountries, setFavouriteCountries] = useState([])
-
 
     useEffect(() => {
         getCountries()
@@ -31,12 +31,12 @@ const CountryContainer = () => {
     }
 
     const onFavRemoveClick = function(country) {
-        setFavouriteCountries(removeFavCountry(country))
+        removeFavCountry(country)
     }
 
     const removeFavCountry = function(country) {
-        favouriteCountries.splice(country, 1);
-        return (favouriteCountries);
+        // favouriteCountries.splice(country, 1);
+        setFavouriteCountries(favouriteCountries.filter(filteredCountry => filteredCountry !== country));
     }
     
     const addFavCountry = function(country) {
@@ -46,16 +46,26 @@ const CountryContainer = () => {
         }
     }
 
+    const isFavouriteCountry = function(country) {
+        if (favouriteCountries.includes(country) === true) {
+            return "red;"
+        } else {
+            return "black;"
+        }
+    }
+
     return (
         <>
-        <div className ="main-container">
-            <CountryList countries = {countries} onCountryClick={onCountryClick} onFavClick = {onFavClick} />
-        </div>
-        <div>
-            {selectedCountry ? <CountryDetails country={selectedCountry} /> : null}
-        </div>
-        <div className ="fav-container">
-            <FavCountryList countries={favouriteCountries} onFavRemoveClick ={onFavRemoveClick}/>
+        <div className="main-container">
+            <div className ="country-container">
+                <CountryList countries = {countries} onCountryClick={onCountryClick} onFavClick = {onFavClick} favouriteCountries ={favouriteCountries} isFavouriteCountry= {isFavouriteCountry}/>
+            </div>
+            <div>
+                {selectedCountry ? <CountryDetails country={selectedCountry} /> : null}
+            </div>
+            <div className ="fav-container">
+                <FavCountryList countries={favouriteCountries} onFavRemoveClick ={onFavRemoveClick}/>
+            </div>
         </div>
         </>
     ) 

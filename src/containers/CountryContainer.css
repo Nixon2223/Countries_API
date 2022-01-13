@@ -1,0 +1,10 @@
+.main-container {
+    display: flex;
+    text-align: center;
+    justify-content: row;
+    margin: 10px;
+    gap: 60px;
+}
+
+
+

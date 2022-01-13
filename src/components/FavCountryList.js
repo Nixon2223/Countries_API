@@ -9,6 +9,7 @@ const FavCountryList = ({countries, onFavRemoveClick}) => {
 
     return (
         <>
+        <h2>Favourite Countries</h2>
         <table>
             <tr>
                 <th></th>
