@@ -8,7 +8,7 @@ function App() {
   <h1>This is the App Container </h1>
     <CountryContainer />
   </>
-  );
+  )
 }
 
 export default App;
